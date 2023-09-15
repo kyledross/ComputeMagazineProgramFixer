@@ -1,3 +1,5 @@
+# This program will read in an IBM PC program from Compute! magazine, check the checksums, and write the program out
+# as a properly-formatted BASIC program.
 
 
 def fix_program():
@@ -24,7 +26,7 @@ def fix_program():
             current_indent = indents(line)
             # write newLine to the output file if it is not empty
             if new_line != "":
-                new_line=new_line.strip()
+                new_line = new_line.strip()
                 checksum = compute_checksum(new_line)
                 if checksum != current_checksum:
                     print("Checksum error on line: " + new_line)
@@ -55,14 +57,14 @@ def indents(line):
         if line[i].isalpha():
             return i
 
+
 def compute_checksum(line):
-    cksum=0
+    checksum = 0
     for i in range(1, len(line) + 1):
-        cksum = (cksum + ord(line[i-1])*i) & 255
-    cksum_ = chr(65 + round(cksum / 16)) + chr(65 + (cksum & 15))
-    return cksum_
+        checksum = (checksum + ord(line[i - 1]) * i) & 255
+    checksum = chr(65 + round(checksum / 16)) + chr(65 + (checksum & 15))
+    return checksum
+
 
 if __name__ == '__main__':
     fix_program()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
