@@ -28,6 +28,8 @@ def fix_program():
                 checksum = compute_checksum(new_line)
                 if checksum != current_checksum:
                     print("Checksum error on line: " + new_line)
+                    print("Expected checksum: " + current_checksum)
+                    print("Actual checksum: " + checksum)
                 file.write(new_line + "\n")
 
             # reset newLine
