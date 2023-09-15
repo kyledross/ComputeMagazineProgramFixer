@@ -2,7 +2,7 @@
 
 def fix_program():
     # open file
-    file = open("ChainReaction.bas", "r")
+    file = open("ChainReaction.txt", "r")
     # read file
     lines = file.readlines()
     # close file
@@ -12,6 +12,7 @@ def fix_program():
     # write file
     new_line = ""
     current_indent = 0
+    current_checksum = ""
     for line in lines:
         # make line exactly 32 characters long by adding spaces to the end if needed
         line = line.rstrip()
@@ -23,10 +24,16 @@ def fix_program():
             current_indent = indents(line)
             # write newLine to the output file if it is not empty
             if new_line != "":
+                new_line=new_line.strip()
+                checksum = compute_checksum(new_line)
+                if checksum != current_checksum:
+                    print("Checksum error on line: " + new_line)
                 file.write(new_line + "\n")
+
             # reset newLine
             new_line = ""
             # remove the two letters and add to newline and remove carriage return
+            current_checksum = line[0:2]
             new_line += line[2:].lstrip().replace("\n", "")
         # if line begins with spaces
         elif line[0] == " ":
@@ -46,6 +53,12 @@ def indents(line):
         if line[i].isalpha():
             return i
 
+def compute_checksum(line):
+    cksum=0
+    for i in range(1, len(line) + 1):
+        cksum = (cksum + ord(line[i-1])*i) & 255
+    cksum_ = chr(65 + round(cksum / 16)) + chr(65 + (cksum & 15))
+    return cksum_
 
 if __name__ == '__main__':
     fix_program()
