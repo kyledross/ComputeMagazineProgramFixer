@@ -1,6 +1,6 @@
 
 
-def fixProgram():
+def fix_program():
     # open file
     file = open("ChainReaction.bas", "r")
     # read file
@@ -10,7 +10,7 @@ def fixProgram():
     # open file
     file = open("ChainReactionFixed.bas", "w")
     # write file
-    newLine = ""
+    new_line = ""
     current_indent = 0
     for line in lines:
         # make line exactly 32 characters long by adding spaces to the end if needed
@@ -22,20 +22,20 @@ def fixProgram():
         if line[0].isalpha() and line[1].isalpha():
             current_indent = indents(line)
             # write newLine to the output file if it is not empty
-            if newLine != "":
-                file.write(newLine + "\n")
+            if new_line != "":
+                file.write(new_line + "\n")
             # reset newLine
-            newLine = ""
+            new_line = ""
             # remove the two letters and add to newline and remove carriage return
-            newLine += line[2:].lstrip().replace("\n", "")
+            new_line += line[2:].lstrip().replace("\n", "")
         # if line begins with spaces
         elif line[0] == " ":
             # remove all spaces and add to newline
-            newLine += line[current_indent:].replace("\n", "")
+            new_line += line[current_indent:].replace("\n", "")
 
     # close file
-    if newLine != "":
-        file.write(newLine + "\n")
+    if new_line != "":
+        file.write(new_line + "\n")
     file.close()
 
 
@@ -48,6 +48,6 @@ def indents(line):
 
 
 if __name__ == '__main__':
-    fixProgram()
+    fix_program()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
