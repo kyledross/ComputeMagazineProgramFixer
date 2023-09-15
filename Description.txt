@@ -1,0 +1,4 @@
+
+The file consists of a BASICA program that has been split into multiple lines per statement.
+Each statement begins with two letters, which must be stripped out.  The remaining lines must be concatenated together to form a single line per statement.
+The program will then be saved to a new file.
