@@ -1,5 +1,5 @@
 # This program will read in an IBM PC program from Compute! magazine, check the checksums, and write the program out
-# as a properly-formatted BASIC program.
+# as a properly-formatted BASICA program.
 
 
 def fix_program():
